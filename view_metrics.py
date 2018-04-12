@@ -24,7 +24,8 @@ def get_publisher_metrics(snap_name, metric_name, authorization):
     r.raise_for_status()
     snap_id = r.json()['snap_id']
 
-    yesterday = datetime.date.today() - datetime.timedelta(1)
+    yesterday = datetime.datetime.utcnow().date() - datetime.timedelta(1)
+
     start = end = yesterday.isoformat()
     filters = [
         {"metric_name": metric_name, "snap_id": snap_id, "start": start, "end": end},
